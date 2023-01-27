@@ -14,8 +14,8 @@ const camera = {
   mousemulti : 1
 }
 const worldBorder = {
-  maxX:2000,
-  maxY:2000,
+  maxX:200,
+  maxY:200,
 }
 var img = new Image()
 var fps = 60
@@ -165,6 +165,12 @@ function mouseCamera(event,multimax,rect){
     {camera.x = -camera.mousex}
   if (camera.y+camera.mousey < 0)
   {camera.y = -camera.mousey}
+  if (camera.x+camera.mousex > worldBorder.maxX){
+    camera.mousex *= 0.5
+  }
+  if (camera.y+camera.mousey > worldBorder.maxY){
+    camera.mousey *= 0.5
+  }
   
   
   
@@ -261,8 +267,8 @@ function loop(){
 
 
   // mapping background -- start
-  for (var i = 0;i < canvas.width+worldBorder.maxX+236+camera.x+camera.mousex; i += 236){
-    for (var j = 0;j < canvas.height+worldBorder.maxY+236+camera.y+camera.mousey; j += 236){
+  for (var i = 0;i < canvas.width+worldBorder.maxX+236; i += 236){
+    for (var j = 0;j < canvas.height+worldBorder.maxY+236; j += 236){
       ctx.drawImage(img,j,i)
     }} 
   // mapping background -- end
